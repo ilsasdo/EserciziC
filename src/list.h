@@ -15,6 +15,7 @@ typedef struct _list
 
 list list_crea (void* value);
 
+
 // funzioni per aggiungere/togliere elementi dalla lista:
 /*
 // inserisce l'elemento di index "ind" e name "id" in coda alla lista

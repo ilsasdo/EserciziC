@@ -48,25 +48,50 @@ int main () {
   assertEquals (1, isFineNomeProdotto("ciao\""));
   assertEquals (0, isFineNomeProdotto("ciao"));
 
-  Articolo articolo;
   char nome[256];
   FILE *fp;
   fp = apriFile("data/dati.txt");
-  assertNotNull(fp);
-  getNomeProdotto(fp, articolo.nome);
+
+  Articolo articolo = readArticolo(fp);
   assertStrEquals ("\"APPLE TV\"", articolo.nome);
-
-  getPrezzo(fp, &(articolo.prezzo));
   assertFloatEquals (170.99, articolo.prezzo);
+  assertStrEquals("peso", articolo.features[0].nome);
+  assertStrEquals("123g", articolo.features[0].valore);
+  assertEquals(1, articolo.numeroFeature);
 
-  int testInt = 5;
-  list l = list_crea((void*)&testInt);
-  assertNotNull(&l);
-  assertEquals(testInt, *((int*)(l.value)));
+  Articolo art = readArticolo(fp);
+  assertStrEquals ("\"APPLE TV 1\"", art.nome);
+  assertFloatEquals (171.99, art.prezzo);
+  assertStrEquals("peso", art.features[0].nome);
+  assertStrEquals("124g", art.features[0].valore);
+  assertStrEquals("altezza", art.features[1].nome);
+  assertStrEquals("101cm", art.features[1].valore);
+  assertStrEquals("larghezza", art.features[2].nome);
+  assertStrEquals("151cm", art.features[2].valore);
+  assertStrEquals("profondità", art.features[3].nome);
+  assertStrEquals("4cm", art.features[3].valore);
+  assertEquals(4, art.numeroFeature);
 
-  Feature f = getFeature(fp);
-  assertStrEquals("peso", f.nome);
-  assertStrEquals("123g", f.valore);
+
+  // assertNotNull(fp);
+  // getNomeProdotto(fp, articolo.nome);
+  // assertStrEquals ("\"APPLE TV\"", articolo.nome);
+  //
+  // getPrezzo(fp, &(articolo.prezzo));
+  // assertFloatEquals (170.99, articolo.prezzo);
+  //
+  // int testInt = 5;
+  // list l = list_crea((void*)&testInt);
+  // assertNotNull(&l);
+  // assertEquals(testInt, *((int*)(l.value)));
+  //
+  // articolo.numeroFeature = getFeatures(fp, articolo.features);
+  // assertStrEquals("peso", articolo.features[0].nome);
+  // assertStrEquals("123g", articolo.features[0].valore);
+  // assertEquals(1, articolo.numeroFeature);
+
+
+
 
   printf ("Test Eseguiti: %d, Falliti: %d, Successo: %d\n", testTotal, testFailed, (testTotal - testFailed));
 

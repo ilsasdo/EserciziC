@@ -12,7 +12,7 @@ typedef struct {
   char nome[256];
   float prezzo;
 
-  Feature feature[128];
+  Feature features[128];
   int numeroFeature;
 } Articolo;
 
@@ -24,3 +24,7 @@ void getPrezzo (FILE *fp, float *prezzo);
 FILE* apriFile (char *path);
 
 Feature getFeature (FILE *fp);
+
+int getFeatures (FILE *fp, Feature features[]);
+
+Articolo readArticolo (FILE *fp);
