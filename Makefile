@@ -14,7 +14,7 @@ esercizio1: libs
 
 libs: clean
 	gcc -c src/esercizio1.c -o tmp/esercizio1.o
-#	gcc -c src/list.c -o tmp/list.o
+	gcc -c src/list.c -o tmp/list.o
 #	gcc -c src/element.c -o tmp/element.o
 
 clean:

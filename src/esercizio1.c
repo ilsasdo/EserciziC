@@ -17,10 +17,29 @@ void getNomeProdotto (FILE *fp, char *nome) {
       strcat(nome, " ");
     }
     strcat(nome, tmp);
-    printf("%s\n", nome);
   } while (isFineNomeProdotto(tmp) == 0);
+}
+
+void getPrezzo (FILE *fp, float *prezzo) {
+  fscanf(fp, "%f", prezzo);
 }
 
 void esercizio1 (char *nomeFile) {
   FILE *fp = fopen (nomeFile, "r");
+}
+
+FILE* apriFile (char *path) {
+  FILE *fp = fopen (path, "r");
+
+  if (fp == NULL) {
+    printf("Errore nell'apertura del file: %d \n", errno);
+  }
+
+  return fp;
+}
+
+Feature getFeature (FILE *fp) {
+  Feature feature;
+  fscanf(fp, "%s%s", feature.nome, feature.valore);
+  return feature;
 }
