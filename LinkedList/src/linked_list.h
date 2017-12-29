@@ -14,10 +14,16 @@ typedef struct _list_element {
 } linked_list;
 
 // ritorna TRUE se l'elemento corrisponde al filtro richiesto
-typedef boolean (*filter_function) (void *el);
+typedef boolean (*filter_function) (void* el);
 
 // ritorna 0 se i due elmenti sono uguali, < 0 se il primo è minore del secondo, > 0 se il primo è maggiore del secondo
-typedef int (*compare_function) (void *el1, void *el2);
+typedef int (*compare_function) (void* el1, void* el2);
+
+// trasforma un elemento di una lista in un altro elemento.
+typedef void* (*map_function) (void* el);
+
+// funzione di aggregazione sull'elemento della lista.
+typedef void (*reduce_function) (void* value, void* el);
 
 // crea una nuova linked list con un elemento
 linked_list* linked_list_create (void* value);
@@ -42,5 +48,14 @@ linked_list* linked_list_add (linked_list* list, void* value);
 
 // ottiene il valore contenuto nell'i-esimo elemento della lista
 void* linked_list_get (linked_list* list, int index);
+
+// trasforma una lista di elementi in un'altra lista di elementi
+linked_list* linked_list_map (linked_list* list, map_function map);
+
+// trasforma una lista di elementi in un valore scalare.
+void linked_list_reduce (linked_list* list, void* init, reduce_function reduce);
+
+// inverte l'ordine di una lista
+linked_list* linked_list_reverse(linked_list* list);
 
 #endif

@@ -113,7 +113,7 @@ linked_list* linked_list_filter (linked_list* ll, filter_function filter) {
 	linked_list* filtered = NULL;
 	linked_list* current = ll;
 
-	while (current->next) {
+	while (current) {
 		if (filter(current->value)) {
 			if (filtered == NULL) {
 				filtered = linked_list_create(current->value);
@@ -132,7 +132,7 @@ void linked_list_sort_asc (linked_list** list, compare_function compare) {
 	_merge_sort(list, compare);
 }
 
-linked_list* _reverse (linked_list* list, linked_list* last) {
+linked_list* _reverse(linked_list *list, linked_list *last) {
 	if (list == NULL) {
 		return last;
 	}
@@ -142,7 +142,7 @@ linked_list* _reverse (linked_list* list, linked_list* last) {
 }
 
 linked_list* linked_list_reverse (linked_list* list) {
-	return _reverse (list, NULL);
+	return _reverse(list, NULL);
 }
 
 void linked_list_sort_desc (linked_list** list, compare_function compare) {
@@ -174,12 +174,38 @@ linked_list* linked_list_get_last (linked_list* ll) {
 }
 
 int linked_list_size (linked_list* ll) {
-	int size = 1;
+	int size = 0;
 	linked_list* last = ll;
-	while (last->next) {
+	while (last) {
 		last = last->next;
 		size ++;
 	}
 
 	return size;
+}
+
+linked_list* linked_list_map (linked_list* ll, map_function map) {
+	linked_list* current = ll;
+	linked_list* mapped = NULL;
+	while (current) {
+		void* el = map(current->value);
+
+		if (mapped == NULL) {
+			mapped = linked_list_create(el);
+		} else {
+			linked_list_add(mapped, el);
+		}
+
+		current = current->next;
+	};
+
+	return mapped;
+}
+
+void linked_list_reduce (linked_list* ll, void* init, reduce_function reduce) {
+	linked_list* current = ll;
+	while (current) {
+		reduce(init, current->value);
+		current = current->next;
+	};
 }

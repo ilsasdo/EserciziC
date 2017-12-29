@@ -27,7 +27,7 @@ void assertFloatEquals (float a, float b) {
 void assertStrEquals (char *a, char *b) {
 	testTotal ++;
 	if (strcmp(a, b) != 0) {
-		printf ("[Test n. %d] --> Mi aspettavo %s, ho ricevuto %s\n", testTotal, a, b);
+		printf ("[Test n. %d] --> Mi aspettavo '%s', ho ricevuto '%s'\n", testTotal, a, b);
 		testFailed ++;
 		return;
 	}
